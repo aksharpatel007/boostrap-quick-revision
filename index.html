@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>Bootstrap 5 Professional Reference Showcase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <style>
+        /* --- Root Variables for UI Consistency --- */
+        :root {
+            --bs-blue: #0d6efd;
+            --main-bg: #0c0d10;
+            --code-bg: #111316;
+            --code-text: #a9b7c6;
+            --glass-alpha: 0.15;
+            /* Lighter transparency for better visibility */
+        }
+
+        /* --- General Styling for Professional Look (UX Enhancement) --- */
+        body {
+            position: relative;
+            padding-top: 60px;
+            background-color: var(--main-bg);
+            /* Subtle background noise for texture (UX) */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 0);
+            background-size: 20px 20px;
+            line-height: 1.6;
+        }
+
+        a,
+        button,
+        .nav-link,
+        .card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Enhanced transition curve (UI) */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #fff; /* Ensure all headings are visible white by default */
+        }
+
+        h2 {
+            color: var(--bs-blue) !important;
+            padding-bottom: 0.75rem; /* Increased padding */
+            margin-top: 2rem;
+            border-bottom: 2px solid rgba(13, 110, 253, var(--glass-alpha));
+            /* Subtle blue underline */
+        }
+        
+        /* Paragraph contrast */
+        .text-secondary, .text-muted, .small {
+            color: #a0a4ab !important; 
+        }
+
+        /* --- Navbar (Refined Frosting) --- */
+        .navbar {
+            background-color: rgba(26, 30, 36, 0.98) !important;
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--bs-blue) !important;
+        }
+
+        /* --- Sticky Index/TOC (Left Panel) - Fixed and Polished (UX/UI Enhancement) --- */
+        .toc-col {
+             /* Ensures it takes full width on small screens and 3 cols on large */
+            z-index: 10;
+        }
+        
+        #toc-wrapper {
+            position: sticky;
+            top: 70px;
+            /* Fixed position relative to viewport when not collapsed (Desktop/Laptop) */
+            height: calc(100vh - 85px);
+            overflow-y: auto;
+            padding: 1.5rem 1rem 1.5rem 0.5rem;
+            
+            /* Enhanced Glassmorphism Effect */
+            background-color: rgba(26, 30, 36, 0.85); 
+            backdrop-filter: blur(12px) brightness(1.1); /* Brighter frost */
+            border-radius: 0.75rem;
+            border: 1px solid rgba(13, 110, 253, 0.2); /* Subtle blue border */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Deeper shadow */
+        }
+        
+        /* Mobile Specific Styles for TOC (UX) */
+        @media (max-width: 991.98px) {
+            #toc-wrapper {
+                position: static;
+                height: auto;
+                max-height: 400px; 
+                margin-top: 0.5rem;
+            }
+            .toc-col {
+                order: 0; /* Move TOC above content on small screens */
+            }
+        }
+
+        .nav-link {
+            color: #ccc !important;
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem; /* Slightly larger text for better legibility */
+        }
+
+        .nav-link.active {
+            background-color: var(--bs-blue) !important;
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .nav-link:hover:not(.active) {
+            background-color: rgba(13, 110, 253, 0.15);
+            color: var(--bs-info) !important;
+        }
+
+        /* --- Code and Output Boxes (UI/UX Enhancement) --- */
+        .card {
+            border: 1px solid #333;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+            /* Even deeper, more dramatic shadow */
+        }
+
+        .code-box {
+            border: 1px solid var(--bs-secondary);
+        }
+
+        .code-box pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem; /* Slightly increased font size (UX) */
+            max-height: 300px; /* Increased max height */
+            overflow-y: auto;
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem; /* Increased padding */
+            border-radius: 0 0 0.375rem 0.375rem;
+            border-top: none;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.6); /* Deeper inset shadow */
+        }
+
+        .showcase-section {
+            padding-top: 4rem; 
+            padding-bottom: 3rem;
+            border-bottom: 3px solid rgba(45, 48, 54, 0.5); 
+        }
+
+        .demo-item {
+            padding: 1rem; /* Increased padding for better visual spacing */
+        }
+        
+        .flex-container-demo {
+            border: 2px dashed #0d6efd;
+            min-height: 120px; /* Increased min height */
+        }
+
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#toc-nav" data-bs-smooth-scroll="true" tabindex="0">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg border-bottom border-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-info" href="#">Bootstrap 5 Pro Reference</a>
+            <span class="navbar-text d-none d-md-block text-light fw-light">
+                Code & Output Showcase (BS5 Utilities and Core)
+            </span>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+
+            <div class="toc-col col-12 col-lg-3 mb-4 mb-lg-0">
+                <button class="btn btn-primary w-100 d-lg-none mb-3 shadow" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#toc-collapse" aria-expanded="false" aria-controls="toc-collapse">
+                    <span class="fw-bold">Toggle Reference Index</span>
+                </button>
+
+                <div id="toc-collapse" class="collapse d-lg-block">
+                    <div id="toc-wrapper">
+                        <h5 class="mb-3 text-primary border-bottom pb-2">Reference Index</h5>
+                        <nav id="toc-nav" class="nav nav-pills flex-column">
+                            <a class="nav-link" href="#grid">1. Grid System (BS5 6-Tier)</a>
+                            <a class="nav-link" href="#containers">2. Containers & Breakpoints</a>
+                            <a class="nav-link" href="#spacing">3. Spacing Utilities (m/p)</a>
+                            <a class="nav-link" href="#flexbox">4. Flexbox Layout</a>
+                            <a class="nav-link" href="#typography">5. Typography & Headings</a>
+                            <a class="nav-link" href="#colors">6. Text & Background Colors</a>
+                            <a class="nav-link" href="#borders">7. Borders & Shadows</a>
+                            <a class="nav-link" href="#images">8. Images & Alignment</a>
+                            <a class="nav-link" href="#tables">9. Tables (Styling & Responsive)</a>
+                            <a class="nav-link" href="#buttons">10. Buttons & Alerts</a>
+                            <a class="nav-link" href="#forms">11. Form Controls & Validation</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <main class="col-lg-9">
+                <h1 class="display-5 text-center mb-5 text-light fw-light border-bottom border-secondary pb-3">Bootstrap
+                    5 Utility Class Demonstration</h1>
+
+                <section id="grid" class="showcase-section">
+                    <h2>1. Grid System (BS5 6-Tier Responsive)</h2>
+                    <p class="text-secondary small">Bootstrap 5 introduces the `.col-xxl-*` breakpoint ($\ge 1400px$).
+                        Columns below demonstrate stacking on extra small screens and then breaking into $2$ or $4$
+                        columns based on viewport size. **(UX: Increased Section Padding)**</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <div class="row g-2 border border-secondary p-2 rounded-3 bg-body-tertiary">
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <div class="demo-item bg-success text-dark">.col-md-6 .col-lg-3</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <div class="demo-item bg-info text-dark">.col-md-6 .col-lg-3</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <div class="demo-item bg-warning text-dark">.col-md-6 .col-lg-3</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <div class="demo-item bg-danger text-light">.col-md-6 .col-lg-3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box (UX: Larger Font/Padding)</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Columns stack on default (xs) --&gt;
+    &lt;!-- 2 columns from Medium (768px) --&gt;
+    &lt;!-- 4 columns from Large (992px) --&gt;
+    &lt;div class="row g-2"&gt;
+    &lt;div class="col-12 col-md-6 col-lg-3"&gt;...&lt;/div&gt;
+    &lt;div class="col-12 col-md-6 col-lg-3"&gt;...&lt;/div&gt;
+    &lt;div class="col-12 col-md-6 col-lg-3"&gt;...&lt;/div&gt;
+    &lt;div class="col-12 col-md-6 col-lg-3"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="containers" class="showcase-section">
+                    <h2>2. Containers & Breakpoints</h2>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <div
+                                        class="container-fluid p-3 border border-success bg-body-tertiary rounded-3 mb-3">
+                                        <code class="text-success">.container-fluid</code>: 100% Width (Chapter 6, Page
+                                        5)
+                                    </div>
+                                    <div class="container p-3 border border-danger bg-body-tertiary rounded-3">
+                                        <code class="text-danger">.container</code>: Responsive Fixed Width (Chapter 6,
+                                        Page 5)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Full-Width container --&gt;
+    &lt;div class="container-fluid"&gt;...&lt;/div&gt;
+
+    &lt;!-- Fixed-Width container --&gt;
+    &lt;div class="container"&gt;...&lt;/div&gt;
+
+    &lt;!-- Responsive container up to Large breakpoint --&gt;
+    &lt;div class="container-lg"&gt;...&lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="spacing" class="showcase-section">
+                    <h2>3. Spacing Utilities (`m` & `p` for Margin & Padding)</h2>
+                    <p class="text-secondary small">Format: `{property}{sides}-{size}` or
+                        `{property}{sides}-{breakpoint}-{size}` (Chapter 6, Page 6)</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <div class="bg-primary bg-opacity-25 p-1 rounded-3 border border-secondary">
+                                        <p class="text-muted small m-0 ps-2">Parent (.p-1)</p>
+                                        <div class="bg-warning text-dark p-5 mt-3 mb-5 mx-auto border border-dark rounded-3"
+                                            style="width: 75%;">
+                                            <code class="d-block text-center">.p-5 .mt-3 .mb-5 .mx-auto</code> (Padding
+                                            5, Margin Top 3, Margin Bottom 5, Center)
+                                        </div>
+                                        <div class="bg-info text-dark py-4 text-center rounded-3">
+                                            <code class="d-block text-center">.py-4</code> (Padding Top/Bottom 4)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Padding all sides (p-5) --&gt;
+    &lt;div class="p-5"&gt;...&lt;/div&gt;
+
+    &lt;!-- Margin top (mt-3) and bottom (mb-5) --&gt;
+    &lt;div class="mt-3 mb-5"&gt;...&lt;/div&gt;
+
+    &lt;!-- Padding on Y-axis (py-4) --&gt;
+    &lt;div class="py-4"&gt;...&lt;/div&gt;
+
+    &lt;!-- Center horizontally (mx-auto) --&gt;
+    &lt;div class="mx-auto"&gt;...&lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="flexbox" class="showcase-section">
+                    <h2>4. Flexbox Layout (`.d-flex`, `.justify-content-*`, `.flex-column`)</h2>
+                    <p class="text-secondary small">Bootstrap 5 relies on Flexbox for layout control. (Chapter 7, Page
+                        24)</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <p class="text-muted small m-0">Horizontal:
+                                        <code>.d-flex .justify-content-center</code>
+                                    </p>
+                                    <div class="d-flex justify-content-center flex-container-demo mb-3">
+                                        <div class="demo-item bg-info text-dark">Item 1</div>
+                                        <div class="demo-item bg-warning text-dark">Item 2</div>
+                                    </div>
+
+                                    <p class="text-muted small m-0">Vertical: <code>.d-flex .flex-column</code></p>
+                                    <div class="d-flex flex-column flex-container-demo">
+                                        <div class="demo-item bg-success text-dark">Item A</div>
+                                        <div class="demo-item bg-danger text-light">Item B</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Center items horizontally --&gt;
+    &lt;div class="d-flex justify-content-center"&gt;
+    &lt;div&gt;Item 1&lt;/div&gt;
+    &lt;div&gt;Item 2&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Stack items vertically --&gt;
+    &lt;div class="d-flex flex-column"&gt;
+    &lt;div&gt;Item A&lt;/div&gt;
+    &lt;div&gt;Item B&lt;/div&gt;
+    &lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="typography" class="showcase-section">
+                    <h2>5. Typography & Headings</h2>
+                    <p class="text-secondary small">Display headings are larger and lighter than standard headings.
+                        (Chapter 6, Page 9)</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <h1 class="text-warning">h1. Bootstrap Heading (2.5rem)</h1>
+                                    <h1 class="display-3 text-info">Display 3 Heading</h1>
+                                    <p class="text-muted">Use the mark element to <mark
+                                            class="text-dark">highlight</mark> text. (Chapter 6, Page 13)</p>
+                                    <blockquote class="blockquote border-start border-4 border-danger ps-3">
+                                        <p class="mb-0">"You can fool all of the people some of the time..."</p>
+                                        <footer class="blockquote-footer text-danger">Abraham Lincoln</footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;h1&gt;h1. Bootstrap Heading&lt;/h1&gt;
+    &lt;h1 class="display-3"&gt;Display 3 Heading&lt;/h1&gt;
+
+    &lt;p&gt;Use &lt;mark&gt;highlight&lt;/mark&gt; text.&lt;/p&gt;
+
+    &lt;blockquote class="blockquote"&gt;
+        &lt;p&gt;...quotation...&lt;/p&gt;
+        &lt;footer class="blockquote-footer"&gt;Author&lt;/footer&gt;
+    &lt;/blockquote&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="colors" class="showcase-section">
+                    <h2>6. Text & Background Colors (`.text-*`, `.bg-*`)</h2>
+                    <p class="text-secondary small">Contextual classes provide meaning through colors (Chapter 6, Page
+                        15 & 17).</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <p class="text-primary fw-bold">.text-primary</p>
+                                    <p class="text-success fw-bold">.text-success</p>
+                                    <p class="text-danger fw-bold">.text-danger</p>
+                                    <div class="p-3 mb-2 bg-warning text-dark rounded-3 fw-bold">.bg-warning .text-dark
+                                    </div>
+                                    <div class="p-3 mb-2 bg-dark text-light border border-light rounded-3 fw-bold">
+                                        .bg-dark .text-light</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Text Colors --&gt;
+    &lt;p class="text-primary"&gt;...&lt;/p&gt;
+    &lt;p class="text-danger"&gt;...&lt;/p&gt;
+    &lt;p class="text-muted"&gt;...&lt;/p&gt;
+
+    &lt;!-- Background Colors --&gt;
+    &lt;div class="bg-warning text-dark"&gt;...&lt;/div&gt;
+    &lt;div class="bg-dark text-light"&gt;...&lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="borders" class="showcase-section">
+                    <h2>7. Borders & Shadows (`.border*`, `.rounded*`, `.shadow*`)</h2>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body d-flex flex-wrap gap-3">
+                                    <div class="p-3 border border-3 border-primary rounded-3 fw-bold">Border 3</div>
+                                    <div class="p-3 border border-danger border-end-0 rounded-0 fw-bold">No Right Border
+                                    </div>
+                                    <div class="p-3 border border-warning rounded-pill shadow-lg fw-bold">Pill & Shadow
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Colored border with thickness --&gt;
+    &lt;div class="border border-3 border-primary"&gt;...&lt;/div&gt;
+
+    &lt;!-- Specific side removed --&gt;
+    &lt;div class="border-end-0"&gt;...&lt;/div&gt;
+
+    &lt;!-- Full rounded shape and large shadow --&gt;
+    &lt;div class="rounded-pill shadow-lg"&gt;...&lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="images" class="showcase-section">
+                    <h2>8. Images & Alignment (`.img-fluid`, `.rounded*`)</h2>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body d-flex flex-wrap gap-3 align-items-center">
+                                    <img src="https://placehold.co/80x80/0d6efd/ffffff?text=Fluid"
+                                        class="img-fluid rounded-3 shadow-sm" alt="Responsive Image"
+                                        style="max-width: 80px;">
+                                    <img src="https://placehold.co/80x80/28a745/ffffff?text=Thumb"
+                                        class="img-thumbnail shadow-sm" alt="Image Thumbnail" style="max-width: 80px;">
+                                    <img src="https://placehold.co/80x80/dc3545/ffffff?text=Circle"
+                                        class="rounded-circle shadow-sm" alt="Rounded Circle" style="max-width: 80px;">
+                                    <p class="w-100 text-muted small mt-2">The images use `.img-fluid`, `.img-thumbnail`
+                                        and `.rounded-circle` (Chapter 6, Page 35).</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Responsive Image --&gt;
+    &lt;img src="..." class="img-fluid rounded-3"&gt;
+
+    &lt;!-- Image with border/padding --&gt;
+    &lt;img src="..." class="img-thumbnail"&gt;
+
+    &lt;!-- Circular Image --&gt;
+    &lt;img src="..." class="rounded-circle"&gt;
+
+    &lt;!-- Center a block image --&gt;
+    &lt;img class="mx-auto d-block"&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tables" class="showcase-section">
+                    <h2>9. Tables (Styling & Responsive)</h2>
+                    <p class="text-secondary small">Adding basic, dark, striped, and hover effects (Chapter 6, Page
+                        27-30).</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-dark table-striped table-hover table-sm">
+                                            <thead>
+                                                <tr class="table-primary">
+                                                    <th scope="col" class="text-dark">#</th>
+                                                    <th scope="col" class="text-dark">Name</th>
+                                                    <th scope="col" class="text-dark">City</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>1</th>
+                                                    <td>A</td>
+                                                    <td>Ahmedabad</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>2</th>
+                                                    <td>B</td>
+                                                    <td class="table-danger text-dark fw-bold">Rajkot (Danger Cell)</td>
+                                                </tr>
+                                                <tr class="table-info text-dark">
+                                                    <th>3</th>
+                                                    <td>C</td>
+                                                    <td>Surat (Info Row)</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Responsive container for table (Chapter 6, Page 33) --&gt;
+    &lt;div class="table-responsive"&gt;
+    &lt;table class="table table-dark table-striped table-hover table-sm"&gt;
+        &lt;thead&gt;
+        &lt;tr class="table-primary"&gt;...&lt;/tr&gt; &lt;!-- Contextual Header Row --&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        &lt;tr&gt;...&lt;/tr&gt;
+        &lt;tr class="table-info"&gt;...&lt;/tr&gt; &lt;!-- Contextual Body Row --&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="buttons" class="showcase-section">
+                    <h2>10. Buttons & Alerts</h2>
+                    <p class="text-secondary small">Button styles and dismissible alerts (Chapter 6, Page 37 & 40).</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box</div>
+                                <div class="card-body">
+                                    <button class="btn btn-primary btn-lg mb-3 me-2 shadow-sm">Primary Large</button>
+                                    <button class="btn btn-outline-danger shadow-sm">Danger Outline</button>
+
+                                    <div class="alert alert-warning alert-dismissible fade show fw-bold mt-3 shadow"
+                                        role="alert">
+                                        Warning Alert! Use <a href="#" class="alert-link">alert-link</a> for matching
+                                        color.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Button Sizes (btn-lg, btn-sm) --&gt;
+    &lt;button class="btn btn-primary btn-lg"&gt;...&lt;/button&gt;
+    &lt;button class="btn btn-outline-danger"&gt;...&lt;/button&gt;
+
+    &lt;!-- Dismissible Alert Component --&gt;
+    &lt;div class="alert alert-warning alert-dismissible fade show" role="alert"&gt;
+        ...
+        &lt;button type="button" class="btn-close" data-bs-dismiss="alert"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="forms" class="showcase-section">
+                    <h2>11. Form Controls & Validation</h2>
+                    <p class="text-secondary small">Bootstrap 5 form validation and styling (Chapter 7, Page 40 & 46).
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 bg-dark border-info">
+                                <div class="card-header bg-primary text-light fw-bold">Output Box (Validation Demo)
+                                </div>
+                                <div class="card-body">
+                                    <form action="#" class="was-validated">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="uname">User Name:</label>
+                                            <input type="text" class="form-control" id="uname"
+                                                placeholder="Enter user_name" required>
+                                            <div class="invalid-feedback">Please fill the user name.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="gender">Gender:</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" value="male"
+                                                    required>
+                                                <label class="form-check-label">Male</label>
+                                            </div>
+                                            <div class="form-check form-switch form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="agree" required>
+                                                <label class="form-check-label" for="agree">I Agree</label>
+                                                <div class="invalid-feedback">You must agree.</div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-warning shadow">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-lg h-100 code-box bg-dark border-secondary">
+                                <div class="card-header bg-secondary text-light fw-bold">Code Box</div>
+                                <div class="card-body p-0">
+                                    <pre class="m-0"><code class="language-html">
+    &lt;!-- Validation Example (.was-validated) --&gt;
+    &lt;form action="#" class="was-validated"&gt;
+    &lt;div class="mb-3"&gt;
+        &lt;label class="form-label"&gt;User Name:&lt;/label&gt;
+        &lt;input type="text" class="form-control" required&gt;
+        &lt;div class="invalid-feedback"&gt;Please fill the user name.&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Toggle Switch Example (Chapter 7, Page 49) --&gt;
+    &lt;div class="form-check form-switch"&gt;
+        &lt;input class="form-check-input" type="checkbox" required&gt;
+        &lt;label class="form-check-label"&gt;I Agree&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;/form&gt;
+                                            </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <p class="text-center text-secondary mt-5 mb-5 border-top pt-3">End of Comprehensive Reference. This
+                    page is built using Bootstrap 5 and designed to be fully responsive for all devices. Detailed code
+                    available at: <a href="https://github.com/aksharpatel007/bootstrap-5" target="_blank"
+                        class="text-info text-decoration-none fw-bold">aksharpatel007/bootstrap-5</a>.</p>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
